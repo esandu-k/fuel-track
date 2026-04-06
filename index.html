@@ -23,16 +23,12 @@
     <main>
         <section>
             <h2>Current Fuel Prices</h2>
-
             <p>Petrol 92 Octane</p>
             <p>Rs 398</p>
-
             <p>Petrol 95 Octane</p>
             <p>Rs 455</p>
-
             <p>Auto Diesel</p>
             <p>Rs 382</p>
-
             <p>Super Diesel</p>
             <p>Rs 443</p>
         </section>
@@ -40,6 +36,29 @@
         <footer>
             <p>Last Updated: March 22, 2026</p>
         </footer>
+
+        <section>
+            <h2>Efficiency Calculator</h2>
+
+            <p>Select Fuel Type to see Price:</p>
+            <ul id="fuel-selector">
+                <li><button onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane</button></li>
+                <li><button onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane</button></li>
+                <li><button onclick="showPrice('Auto Diesel', 382)">Auto Diesel</button></li>
+                <li><button onclick="showPrice('Super Diesel', 443)">Super Diesel</button></li>
+            </ul>
+
+            <!-- This is where the price will show up -->
+            <p id="price-display">Select a fuel to see the current price per liter.</p>
+
+            <hr>
+
+            <p>Distance (km)</p>
+            <input type="number" id="distance" placeholder="0.0">
+
+            <p>Fuel (liter)</p>
+            <input type="number" id="fuel" placeholder="0.0">
+        </section>
     </main>
 
     <script src="fuel.js"></script>

@@ -15,3 +15,16 @@ function showPrice(type, price) {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Fuel Price Tracker Loaded");
 });
+
+function calculateEfficiency() {
+    const distance=parseFloat(document.getElementById('distance').value);
+    const fuel=parseFloat(document.getElementById('fuel').value);
+    const priceDisplay=document.getElementById('price-display');
+
+    if (!isNaN(distance) && !isNaN(fuel) && fuel > 0) {
+        const efficiency = distance / fuel;
+        priceDisplay.innerHTML += `<br><strong>Fuel Efficiency:</strong> ${efficiency.toFixed(2)} km/l`;
+    } else {
+        priceDisplay.innerHTML += `<br><strong>Error:</strong> Please enter valid distance and fuel values.`;
+    }
+}

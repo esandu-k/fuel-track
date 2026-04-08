@@ -60,9 +60,39 @@
             <button onclick="calculateEfficiency()">Calculate Efficiency</button>
             
         </section>
+
+        <section>
+            <h2>Trip Cost Calculator</h2>
+            <p>Plan your trip — enter distance and your vehicle's efficiency to see fuel needed and cost.</p>
+            <p><strong>Type</strong></p>
+            <ul>
+                <li><button onclick="calculateTripCost('Petrol 92', 398)">Petrol 92 Octane</button></li>
+                <li><button onclick="calculateTripCost('Petrol 95', 455)">Petrol 95 Octane</button></li>
+                <li><button onclick="calculateTripCost('Auto Diesel', 382)">Auto Diesel</button></li>
+                <li><button onclick="calculateTripCost('Super Diesel', 443)">Super Diesel</button></li>
+            </ul>
+
+            <p>Distance (km)</p>
+            <input type="number" id="trip-distance" placeholder="0.0">
+
+            <p>Fuel Efficiency (km/l)</p>
+            <input type="number" id="trip-efficiency" placeholder="0.0">
+
+            <button onclick="calculateTripCost()">Calculate Trip Cost</button>
+
+            <p>Liters Needed</p>
+            <p id="liters-needed-display"></p>
+
+            <p>Total LKR</p>
+            <p id="total-lkr-display"></p>
+
+            <p>LKR / km</p>
+            <p id="lkr-per-km-display"></p>
+
+
+        </section>
     </main>
 
     <script src="fuel.js"></script>
 </body>
-
 </html>

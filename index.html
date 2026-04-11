@@ -6,93 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Tracker Sri Lanka</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
         <h1>Fuel Tracker 2026</h1>
-        <p>Sri Lanka. Fuel Consumption Tracker </p>
+        <p>Sri Lanka • Fuel Consumption Tracker</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#">Calculate</a></li>
-            <li><a href="#">History</a></li>
-            <li><a href="#">Statistics</a></li>
-        </ul>
-    </nav>
+
     <main>
         <section>
             <h2>Current Fuel Prices</h2>
-            <p>Petrol 92 Octane</p>
-            <p>Rs 398</p>
-            <p>Petrol 95 Octane</p>
-            <p>Rs 455</p>
-            <p>Auto Diesel</p>
-            <p>Rs 382</p>
-            <p>Super Diesel</p>
-            <p>Rs 443</p>
+            <p>Select a fuel type to update calculations:</p>
+            <ul>
+                <li><button onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane: Rs 398</button></li>
+                <li><button onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane: Rs 455</button></li>
+                <li><button onclick="showPrice('Auto Diesel', 382)">Auto Diesel: Rs 382</button></li>
+                <li><button onclick="showPrice('Super Diesel', 443)">Super Diesel: Rs 443</button></li>
+            </ul>
+            <p id="price-display" class="result-box">No fuel type selected.</p>
         </section>
-
-        <footer>
-            <p>Last Updated: March 22, 2026</p>
-        </footer>
 
         <section>
             <h2>Efficiency Calculator</h2>
+            <p>Find out your vehicle's fuel efficiency (km per liter).</p>
 
-            <p>Select Fuel Type to see Price:</p>
-            <ul id="fuel-selector">
-                <li><button onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane</button></li>
-                <li><button onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane</button></li>
-                <li><button onclick="showPrice('Auto Diesel', 382)">Auto Diesel</button></li>
-                <li><button onclick="showPrice('Super Diesel', 443)">Super Diesel</button></li>
-            </ul>
+            <p>Distance Traveled (km)</p>
+            <input type="number" id="distance" placeholder="e.g. 100.0">
 
-            <!-- This is where the price will show up -->
-            <p id="price-display">Select a fuel to see the current price per liter.</p>
-
-            <p>Distance (km)</p>
-            <input type="number" id="distance" placeholder="0.0">
-
-            <p>Fuel (liter)</p>
-            <input type="number" id="fuel" placeholder="0.0">
+            <p>Fuel Consumed (liters)</p>
+            <input type="number" id="fuel" placeholder="e.g. 8.5">
 
             <button onclick="calculateEfficiency()">Calculate Efficiency</button>
-            
+            <p id="efficiency-result" class="result-box"></p>
         </section>
 
         <section>
             <h2>Trip Cost Calculator</h2>
-            <p>Plan your trip — enter distance and your vehicle's efficiency to see fuel needed and cost.</p>
-            <p><strong>Type</strong></p>
-            <ul>
-                <li><button onclick="calculateTripCost('Petrol 92', 398)">Petrol 92 Octane</button></li>
-                <li><button onclick="calculateTripCost('Petrol 95', 455)">Petrol 95 Octane</button></li>
-                <li><button onclick="calculateTripCost('Auto Diesel', 382)">Auto Diesel</button></li>
-                <li><button onclick="calculateTripCost('Super Diesel', 443)">Super Diesel</button></li>
-            </ul>
+            <p>Plan your trip — see fuel needed and total cost.</p>
 
-            <p>Distance (km)</p>
-            <input type="number" id="trip-distance" placeholder="0.0">
+            <p>Trip Distance (km)</p>
+            <input type="number" id="trip-distance" placeholder="e.g. 250.0">
 
-            <p>Fuel Efficiency (km/l)</p>
-            <input type="number" id="trip-efficiency" placeholder="0.0">
+            <p>Vehicle Efficiency (km/l)</p>
+            <input type="number" id="trip-efficiency" placeholder="e.g. 15.0">
 
             <button onclick="calculateTripCost()">Calculate Trip Cost</button>
 
-            <p>Liters Needed</p>
-            <p id="liters-needed-display"></p>
+            <div>
+                <p>Liters Needed:</p>
+                <p id="liters-needed-display" class="result-box"></p>
 
-            <p>Total LKR</p>
-            <p id="total-lkr-display"></p>
+                <p>Total Cost (LKR):</p>
+                <p id="total-lkr-display" class="result-box"></p>
 
-            <p>LKR / km</p>
-            <p id="lkr-per-km-display"></p>
-
-
+                <p>Cost per Kilometer (LKR/km):</p>
+                <p id="lkr-per-km-display" class="result-box"></p>
+            </div>
         </section>
     </main>
 
+    <footer>
+        <p>Last Updated: March 22, 2026</p>
+        <p>Designed By Ur Boy Esaa</p>
+    </footer>
+
     <script src="fuel.js"></script>
 </body>
+
 </html>

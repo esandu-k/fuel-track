@@ -1,46 +1,76 @@
+// Global variable to store the selected fuel price
+let currentFuelPrice = 0;
+
 /**
- * Shows the price of the selected fuel type in the price-display paragraph.
- * @param {string} type - The name of the fuel type.
- * @param {number} price - The price of the fuel per liter.
+ * Updates the selected fuel price and displays it in the UI.
  */
 function showPrice(type, price) {
+    currentFuelPrice = price;
     const displayArea = document.getElementById('price-display');
     if (displayArea) {
-        displayArea.innerHTML = `<strong>Selected:</strong> ${type}<br><strong>Price:</strong> Rs ${price} per liter`;
-        displayArea.style.color = '#000000ff'; // Optional color feedback
+        displayArea.innerHTML = `<strong>Selected:</strong> ${type} | <strong>Price:</strong> Rs ${price} / L`;
+        displayArea.style.backgroundColor = '#d4edda'; // Light green background when selected
     }
 }
 
-// Initial placeholder message (optional)
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Fuel Price Tracker Loaded");
-});
-
+/**
+ * Calculates fuel efficiency (km/l).
+ */
 function calculateEfficiency() {
-    const distance = parseFloat(document.getElementById('distance').value);
-    const fuel = parseFloat(document.getElementById('fuel').value);
-    const priceDisplay = document.getElementById('price-display');
+    const distanceInput = document.getElementById('distance');
+    const fuelInput = document.getElementById('fuel');
+    const resultBox = document.getElementById('efficiency-result');
+
+    const distance = parseFloat(distanceInput.value);
+    const fuel = parseFloat(fuelInput.value);
 
     if (!isNaN(distance) && !isNaN(fuel) && fuel > 0) {
         const efficiency = distance / fuel;
-        priceDisplay.innerHTML += `<br><strong>Fuel Efficiency:</strong> ${efficiency.toFixed(2)} km/l`;
+        resultBox.innerHTML = `Efficiency: ${efficiency.toFixed(2)} km/l`;
+        
+        // Auto-fill the efficiency divider in the Trip Calculator for convenience
+        const tripEfficiencyInput = document.getElementById('trip-efficiency');
+        if (tripEfficiencyInput) {
+            tripEfficiencyInput.value = efficiency.toFixed(2);
+        }
     } else {
-        priceDisplay.innerHTML += `<br><strong>Error:</strong> Please enter valid distance and fuel values.`;
+        alert("Please enter a valid distance and fuel amount.");
     }
 }
 
+/**
+ * Calculates trip cost.
+ */
 function calculateTripCost() {
-    const distance = parseFloat(document.getElementById('trip-distance').value);
-    const efficiency = parseFloat(document.getElementById('trip-efficiency').value);
-    const priceDisplay = document.getElementById('price-display');
+    const distanceInput = document.getElementById('trip-distance');
+    const efficiencyInput = document.getElementById('trip-efficiency');
+    
+    const litersDisplay = document.getElementById('liters-needed-display');
+    const totalDisplay = document.getElementById('total-lkr-display');
+    const perKmDisplay = document.getElementById('lkr-per-km-display');
 
-    if (!isNaN(distance) && !isNaN(efficiency) && efficiency > 0) {
-        const fuelNeeded = distance / efficiency;
-        const totalCost = fuelNeeded * priceDisplay.innerHTML;
-        priceDisplay.innerHTML += `<br><strong>Fuel Needed:</strong> ${fuelNeeded.toFixed(2)} liters`;
-        priceDisplay.innerHTML += `<br><strong>Total Cost:</strong> Rs ${totalCost.toFixed(2)}`;
-        priceDisplay.innerHTML += `<br><strong>Cost per km:</strong> Rs ${(totalCost / distance).toFixed(2)}`;
-    } else {
-        priceDisplay.innerHTML += `<br><strong>Error:</strong> Please enter valid distance and efficiency values.`;
+    const distance = parseFloat(distanceInput.value);
+    const efficiency = parseFloat(efficiencyInput.value);
+
+    if (isNaN(distance) || isNaN(efficiency) || efficiency <= 0) {
+        alert("Please enter a valid distance and vehicle efficiency.");
+        return;
     }
+
+    if (currentFuelPrice === 0) {
+        alert("Please select a fuel type from the 'Current Fuel Prices' section first.");
+        return;
+    }
+
+    const fuelNeeded = distance / efficiency;
+    const totalCost = fuelNeeded * currentFuelPrice;
+
+    litersDisplay.innerText = `${fuelNeeded.toFixed(2)} L`;
+    totalDisplay.innerText = `Rs ${totalCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    perKmDisplay.innerText = `Rs ${(totalCost / distance).toFixed(2)} / km`;
 }
+
+// Initialization check
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Fuel Tracker System Initialized.");
+});

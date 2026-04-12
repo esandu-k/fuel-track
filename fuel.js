@@ -66,7 +66,7 @@ function calculateTripCost() {
     const totalCost = fuelNeeded * currentFuelPrice;
 
     litersDisplay.innerText = `${fuelNeeded.toFixed(2)} L`;
-    totalDisplay.innerText = `Rs ${totalCost.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    totalDisplay.innerText = `Rs ${totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     perKmDisplay.innerText = `Rs ${(totalCost / distance).toFixed(2)} / km`;
 }
 
@@ -74,3 +74,30 @@ function calculateTripCost() {
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Fuel Tracker System Initialized.");
 });
+
+/**
+ * Clears all inputs, result boxes, and resets the background colors and global state.
+ */
+function clearAll() {
+    // Clear Input Values
+    document.getElementById("distance").value = "";
+    document.getElementById("fuel").value = "";
+    document.getElementById("trip-distance").value = "";
+    document.getElementById("trip-efficiency").value = "";
+
+    // Clear Result Display Text
+    document.getElementById("efficiency-result").innerText = "";
+    document.getElementById("liters-needed-display").innerText = "";
+    document.getElementById("total-lkr-display").innerText = "";
+    document.getElementById("lkr-per-km-display").innerText = "";
+
+    // Reset Price Display special case
+    const priceDisplay = document.getElementById("price-display");
+    if (priceDisplay) {
+        priceDisplay.innerText = "No fuel type selected.";
+        priceDisplay.style.backgroundColor = ""; // Reset background color to default
+    }
+
+    // Reset State
+    currentFuelPrice = 0;
+}

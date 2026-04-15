@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,20 @@
 </head>
 
 <body>
+
     <header>
         <h1>Fuel Tracker 2026</h1>
         <p>Sri Lanka • Fuel Consumption Tracker</p>
     </header>
+
+
+    <nav>
+        <ul>
+            <li><a href="#">Calculate</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Stats</a></li>
+        </ul>
+    </nav>
 
     <main>
         <form id="fuelForm">
@@ -20,10 +31,13 @@
                 <h2>Current Fuel Prices</h2>
                 <p>Select a fuel type to update calculations:</p>
                 <ul>
-                    <li><button type="button" onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane: Rs 398</button></li>
-                    <li><button type="button" onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane: Rs 455</button></li>
+                    <li><button type="button" onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane: Rs 398</button>
+                    </li>
+                    <li><button type="button" onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane: Rs 455</button>
+                    </li>
                     <li><button type="button" onclick="showPrice('Auto Diesel', 382)">Auto Diesel: Rs 382</button></li>
-                    <li><button type="button" onclick="showPrice('Super Diesel', 443)">Super Diesel: Rs 443</button></li>
+                    <li><button type="button" onclick="showPrice('Super Diesel', 443)">Super Diesel: Rs 443</button>
+                    </li>
                 </ul>
                 <p id="price-display" class="result-box">No fuel type selected.</p>
             </section>
@@ -78,4 +92,5 @@
 
     <script src="fuel.js"></script>
 </body>
+
 </html>

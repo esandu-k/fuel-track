@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation History - Fuel Tracker</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Calculation History</h1>
+        <p>Your past fuel consumption records</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Calculate</a></li>
+            <li class="active"><a href="history.html">History</a></li>
+            <li><a href="#">Stats</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="history-section">
+            <h2>History Log</h2>
+            <div id="history-list">
+                <!-- Stored history will be loaded here by fuel.js -->
+                <p>Loading history...</p>
+            </div>
+
+            <button type="button" id="reset" onclick="clearHistory()"
+                style="background-color: #dc3545; margin-top: 30px;">
+                Clear All History
+            </button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Designed By Ur Boy Esaa</p>
+    </footer>
+
+    <script src="fuel.js"></script>
+</body>
+
+</html>

@@ -9,7 +9,7 @@ function showPrice(type, price) {
     const displayArea = document.getElementById('price-display');
     if (displayArea) {
         displayArea.innerHTML = `<strong>Selected:</strong> ${type} | <strong>Price:</strong> Rs ${price} / L`;
-        displayArea.style.backgroundColor = '#d4edda'; // Light green background when selected
+        displayArea.style.backgroundColor = '#d4edda';
     }
 }
 
@@ -26,9 +26,12 @@ function calculateEfficiency() {
 
     if (!isNaN(distance) && !isNaN(fuel) && fuel > 0) {
         const efficiency = distance / fuel;
-        resultBox.innerHTML = `Efficiency: ${efficiency.toFixed(2)} km/l`;
-        
-        // Auto-fill the efficiency divider in the Trip Calculator for convenience
+        const resultText = `${efficiency.toFixed(2)} km/l`;
+        resultBox.innerHTML = `Efficiency: ${resultText}`;
+
+        // Save to History
+        addHistoryRecord(`Efficiency: ${distance}km / ${fuel}L = ${resultText}`);
+
         const tripEfficiencyInput = document.getElementById('trip-efficiency');
         if (tripEfficiencyInput) {
             tripEfficiencyInput.value = efficiency.toFixed(2);
@@ -44,7 +47,7 @@ function calculateEfficiency() {
 function calculateTripCost() {
     const distanceInput = document.getElementById('trip-distance');
     const efficiencyInput = document.getElementById('trip-efficiency');
-    
+
     const litersDisplay = document.getElementById('liters-needed-display');
     const totalDisplay = document.getElementById('total-lkr-display');
     const perKmDisplay = document.getElementById('lkr-per-km-display');
@@ -62,42 +65,87 @@ function calculateTripCost() {
         return;
     }
 
-    const fuelNeeded = distance / efficiency;
-    const totalCost = fuelNeeded * currentFuelPrice;
+    const fuelNeeded = (distance / efficiency).toFixed(2);
+    const totalCost = (fuelNeeded * currentFuelPrice).toFixed(2);
 
-    litersDisplay.innerText = `${fuelNeeded.toFixed(2)} L`;
-    totalDisplay.innerText = `Rs ${totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    litersDisplay.innerText = `${fuelNeeded} L`;
+    totalDisplay.innerText = `Rs ${parseFloat(totalCost).toLocaleString()}`;
     perKmDisplay.innerText = `Rs ${(totalCost / distance).toFixed(2)} / km`;
+
+    // Save to History
+    addHistoryRecord(`Trip: ${distance}km @ ${efficiency}km/l. Cost: Rs ${totalCost}`);
 }
 
-// Initialization check
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Fuel Tracker System Initialized.");
-});
-
 /**
- * Clears all inputs, result boxes, and resets the background colors and global state.
+ * Clears all inputs and results.
  */
 function clearAll() {
-    // Clear Input Values
     document.getElementById("distance").value = "";
     document.getElementById("fuel").value = "";
     document.getElementById("trip-distance").value = "";
     document.getElementById("trip-efficiency").value = "";
 
-    // Clear Result Display Text
     document.getElementById("efficiency-result").innerText = "";
     document.getElementById("liters-needed-display").innerText = "";
     document.getElementById("total-lkr-display").innerText = "";
     document.getElementById("lkr-per-km-display").innerText = "";
 
-    // Reset Price Display special case
     const priceDisplay = document.getElementById("price-display");
     if (priceDisplay) {
         priceDisplay.innerText = "No fuel type selected.";
-        priceDisplay.style.backgroundColor = ""; // Reset background color to default
+        priceDisplay.style.backgroundColor = "";
     }
-
-    // Reset State
     currentFuelPrice = 0;
 }
+
+// --- HISTORY LOGIC ---
+
+/**
+ * Adds a new record to the local storage history.
+ */
+function addHistoryRecord(details) {
+    const history = JSON.parse(localStorage.getItem('fuelHistory')) || [];
+    const newRecord = {
+        date: new Date().toLocaleString(),
+        details: details
+    };
+    history.unshift(newRecord); // Add to the beginning
+    localStorage.setItem('fuelHistory', JSON.stringify(history.slice(0, 10))); // Keep last 10 records
+    updateHistoryDisplay();
+}
+
+/**
+ * Updates the history display in the HTML.
+ */
+function updateHistoryDisplay() {
+    const historyList = document.getElementById('history-list');
+    const history = JSON.parse(localStorage.getItem('fuelHistory')) || [];
+
+    if (history.length === 0) {
+        historyList.innerHTML = '<p>No history records yet.</p>';
+        return;
+    }
+
+    historyList.innerHTML = history.map(item => `
+        <div style="background: #f8f9fa; padding: 10px; border-left: 4px solid #007bff; margin-bottom: 8px; font-size: 13px;">
+            <small style="color: #6c757d;">${item.date}</small><br>
+            <strong>${item.details}</strong>
+        </div>
+    `).join('');
+}
+
+/**
+ * Clears the history from local storage.
+ */
+function clearHistory() {
+    if (confirm("Are you sure you want to clear all history?")) {
+        localStorage.removeItem('fuelHistory');
+        updateHistoryDisplay();
+    }
+}
+
+// Initialize display on load
+document.addEventListener('DOMContentLoaded', () => {
+    updateHistoryDisplay();
+    console.log("Fuel Tracker System Initialized.");
+});

@@ -152,3 +152,12 @@ nav a {
 nav li:hover a {
     color: white;
 }
+
+nav li.active {
+    background-color: #007bff;
+    color: white;
+}
+
+nav li.active a {
+    color: white;
+}

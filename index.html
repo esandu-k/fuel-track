@@ -9,13 +9,6 @@
 </head>
 
 <body>
-    <div class="bg-animation">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
 
     <header>
         <h1>Fuel Tracker 2026</h1>
@@ -25,7 +18,7 @@
 
     <nav>
         <ul>
-            <li class="active"><a href="#">Calculate </a></li>
+            <li class="active"><a href="index.html">Calculate </a></li>
             <li><a href="history.html">History</a></li>
             <li><a href="stats.html">Stats</a></li>
         </ul>
@@ -33,62 +26,70 @@
 
     <main>
         <form id="fuelForm">
-            <section>
-                <h2>Current Fuel Prices</h2>
-                <p>Select a fuel type to update calculations:</p>
-                <ul>
-                    <li><button type="button" onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane: Rs 398</button>
-                    </li>
-                    <li><button type="button" onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane: Rs 455</button>
-                    </li>
-                    <li><button type="button" onclick="showPrice('Auto Diesel', 382)">Auto Diesel: Rs 382</button></li>
-                    <li><button type="button" onclick="showPrice('Super Diesel', 443)">Super Diesel: Rs 443</button>
-                    </li>
-                </ul>
-                <p id="price-display" class="result-box">No fuel type selected.</p>
-            </section>
+            <div class="two-columns">
+                <div class="col">
+                    <section>
+                        <h2>Current Fuel Prices</h2>
+                        <p>Select a fuel type to update calculations:</p>
+                        <ul>
+                            <li><button type="button" onclick="showPrice('Petrol 92', 398)">Petrol 92 Octane: Rs
+                                    398</button>
+                            </li>
+                            <li><button type="button" onclick="showPrice('Petrol 95', 455)">Petrol 95 Octane: Rs
+                                    455</button>
+                            </li>
+                            <li><button type="button" onclick="showPrice('Auto Diesel', 382)">Auto Diesel: Rs
+                                    382</button></li>
+                            <li><button type="button" onclick="showPrice('Super Diesel', 443)">Super Diesel: Rs
+                                    443</button>
+                            </li>
+                        </ul>
+                        <p id="price-display" class="result-box">No fuel type selected.</p>
+                    </section>
 
-            <section>
-                <h2>Efficiency Calculator</h2>
-                <p>Find out your vehicle's fuel efficiency (km per liter).</p>
+                    <section>
+                        <h2>Efficiency Calculator</h2>
+                        <p>Find out your vehicle's fuel efficiency (km per liter).</p>
 
-                <p>Distance Traveled (km)</p>
-                <input type="number" id="distance" placeholder="e.g. 100.0">
+                        <p>Distance Traveled (km)</p>
+                        <input type="number" id="distance" placeholder="e.g. 100.0">
 
-                <p>Fuel Consumed (liters)</p>
-                <input type="number" id="fuel" placeholder="e.g. 8.5">
+                        <p>Fuel Consumed (liters)</p>
+                        <input type="number" id="fuel" placeholder="e.g. 8.5">
 
-                <button type="button" onclick="calculateEfficiency()">Calculate Efficiency</button>
-                <p id="efficiency-result" class="result-box"></p>
-            </section>
-
-            <section>
-                <h2>Trip Cost Calculator</h2>
-                <p>Plan your trip — see fuel needed and total cost.</p>
-
-                <p>Trip Distance (km)</p>
-                <input type="number" id="trip-distance" placeholder="e.g. 250.0">
-
-                <p>Vehicle Efficiency (km/l)</p>
-                <input type="number" id="trip-efficiency" placeholder="e.g. 15.0">
-
-                <button type="button" onclick="calculateTripCost()">Calculate Trip Cost</button>
-
-                <div>
-                    <p>Liters Needed:</p>
-                    <p id="liters-needed-display" class="result-box"></p>
-
-                    <p>Total Cost (LKR):</p>
-                    <p id="total-lkr-display" class="result-box"></p>
-
-                    <p>Cost per Kilometer (LKR/km):</p>
-                    <p id="lkr-per-km-display" class="result-box"></p>
+                        <button type="button" onclick="calculateEfficiency()">Calculate Efficiency</button>
+                        <p id="efficiency-result" class="result-box"></p>
+                    </section>
                 </div>
 
-                <button type="button" id="reset" onclick="clearAll()">Reset</button>
-            </section>
+                <div class="col">
+                    <section>
+                        <h2>Trip Cost Calculator</h2>
+                        <p>Plan your trip — see fuel needed and total cost.</p>
 
+                        <p>Trip Distance (km)</p>
+                        <input type="number" id="trip-distance" placeholder="e.g. 250.0">
 
+                        <p>Vehicle Efficiency (km/l)</p>
+                        <input type="number" id="trip-efficiency" placeholder="e.g. 15.0">
+
+                        <button type="button" onclick="calculateTripCost()">Calculate Trip Cost</button>
+
+                        <div>
+                            <p>Liters Needed:</p>
+                            <p id="liters-needed-display" class="result-box"></p>
+
+                            <p>Total Cost (LKR):</p>
+                            <p id="total-lkr-display" class="result-box"></p>
+
+                            <p>Cost per Kilometer (LKR/km):</p>
+                            <p id="lkr-per-km-display" class="result-box"></p>
+                        </div>
+
+                        <button type="button" id="reset" onclick="clearAll()">Reset</button>
+                    </section>
+                </div>
+            </div>
         </form>
     </main>
 
